@@ -4,17 +4,31 @@ import { GetStaticProps, NextPage } from "next";
 import ErrorPage from "next/error";
 import NextLink from "next/link";
 
-type User = {
+export type User = {
   id: number;
   name: string;
+  username: string;
   email: string;
   address: {
-    zipcode: string;
+    street: string;
+    suite: string;
     city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
   };
 };
 
-const UserPage: NextPage<{ users: User[] }> = (props) => {
+const UserPage: NextPage<{ users?: User[] }> = (props) => {
   if (!props.users) {
     return <ErrorPage statusCode={404} />;
   }
